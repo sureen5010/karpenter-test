@@ -1,0 +1,6 @@
+settings:
+  # -- Cluster name.
+  clusterName: "minikube"
+  # -- Cluster endpoint. If not set, will be discovered during startup (EKS only)
+  clusterEndpoint: "https://127.0.0.1:32771"
+  # -- If true then assume we can't reach AWS services which don't have a VPC endpoint
