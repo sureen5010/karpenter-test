@@ -1,0 +1,38 @@
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: hsarch-test
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+      nodeClassRef:
+        name: hsarch-test
+        kind: EC2NodeClass
+  disruption:
+    consolidationPolicy: WhenUnderutilized
+    expireAfter: 720h
+---
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: hsarch-test
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  amiFamily: AL2
+  role: "karpenter-node-role"
+  subnetSelector:
+    Name: "dummy"
+  securityGroupSelector:
+    Name: "dummy"
+  tags:
+    environment: minikube
