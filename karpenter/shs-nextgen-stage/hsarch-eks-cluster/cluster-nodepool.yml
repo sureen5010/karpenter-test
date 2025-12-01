@@ -7,15 +7,19 @@ metadata:
 spec:
   template:
     spec:
-      nodeClassRef:
-        name: minikube-demo  # links to EC2NodeClass
-      taints: []
       requirements:
         - key: kubernetes.io/arch
           operator: In
           values: ["amd64"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
+      nodeClassRef:
+        name: minikube-demo
+        kind: EC2NodeClass
   disruption:
-    consolidationPolicy: "WhenEmpty"
+    consolidationPolicy: WhenUnderutilized
+    expireAfter: 720h
 ---
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
