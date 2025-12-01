@@ -10,6 +10,10 @@ spec:
     consolidateAfter: 0s
   template:
     spec:
+      nodeClassRef:
+        name: minikube-demo
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
       requirements:
         - key: kubernetes.io/arch
           operator: In
@@ -17,9 +21,6 @@ spec:
         - key: kubernetes.io/os
           operator: In
           values: ["linux"]
-      nodeClassRef:
-        name: hsarch-test
-        kind: EC2NodeClass
 ---
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
