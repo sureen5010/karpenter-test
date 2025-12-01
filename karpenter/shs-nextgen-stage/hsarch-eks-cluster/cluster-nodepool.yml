@@ -2,8 +2,6 @@ apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
   name: hsarch-test
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   template:
     spec:
@@ -25,8 +23,6 @@ apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
   name: hsarch-test
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   amiFamily: AL2
   role: "karpenter-node-role"
