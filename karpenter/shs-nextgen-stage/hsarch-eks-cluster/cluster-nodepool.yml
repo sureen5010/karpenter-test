@@ -5,6 +5,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
+  disruption:
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidateAfter: 0s
   template:
     spec:
       requirements:
@@ -15,11 +18,8 @@ spec:
           operator: In
           values: ["linux"]
       nodeClassRef:
-        name: minikube-demo
+        name: hsarch-test
         kind: EC2NodeClass
-  disruption:
-    consolidationPolicy: WhenUnderutilized
-    expireAfter: 720h
 ---
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
