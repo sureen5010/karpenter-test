@@ -1,6 +1,16 @@
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::523140806637:role/Karpenter-hsarch-eks-cluster-oh 
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: eks.amazonaws.com/nodegroup
+              operator: In
+              values:
+              - system-addon
 settings:
-  # -- Cluster name.
-  clusterName: "minikube"
-  # -- Cluster endpoint. If not set, will be discovered during startup (EKS only)
-  clusterEndpoint: "https://127.0.0.1:32771"
-  # -- If true then assume we can't reach AWS services which don't have a VPC endpoint
+  clusterName: "hsarch-eks-cluster"
+  clusterEndpoint: "https://A8F3E94A2959A2FD6614FBD33BEE03F4.gr7.us-east-2.eks.amazonaws.com"
+  interruptionQueue: "hsarch-eks-cluster-oh"
