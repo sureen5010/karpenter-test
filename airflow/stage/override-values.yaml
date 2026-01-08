@@ -95,12 +95,6 @@ pgbouncer:
             operator: In
             values:
             - airflow # Affinity to the standard 'airflow' node group
-  auth:
-    # Setting PGBouncer credentials (REDACTED)
-    password: ""
-    postgresPassword: postgres
-    username: ""
-    postgresUsername: ""
 
 # -------------------------------------------------------------------------
 # 5. AIRFLOW COMPONENTS (RESOURCES & NODE AFFINITY)
