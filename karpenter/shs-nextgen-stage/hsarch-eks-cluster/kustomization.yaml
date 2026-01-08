@@ -12,6 +12,5 @@ helmCharts:
     valuesFile: override-values.yml
 
 resources:
-  - ../../base
   - nodeclass.yaml
   - nodepool.yaml
