@@ -10,6 +10,7 @@ helmCharts:
     releaseName: karpenter
     namespace: karpenter
     valuesFile: override-values.yml
+    includeCRDs: true
 
 resources:
   - nodeclass.yaml

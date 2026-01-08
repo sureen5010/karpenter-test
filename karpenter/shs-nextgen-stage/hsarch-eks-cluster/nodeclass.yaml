@@ -1,21 +1,7 @@
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
-  name: default
-spec:
-  amiSelectorTerms:
-    - alias: al2023@latest
-  role: "KarpenterNodeRole-hsarch-eks-cluster-oh"
-  subnetSelectorTerms:
-    - tags:
-        karpenter.sh/discovery: hsarch-eks-cluster
-  securityGroupSelectorTerms:
-    - tags:
-        karpenter.sh/discovery: hsarch-eks-cluster
-  userData: |
-    #!/bin/bash
-    echo "Karpenter provisioned node"
-  tags:
-    Environment: shs-nextgen-stage
-    ManagedBy: karpenter
-    Cluster: hsarch-eks-cluster
+  name: minikube-demo
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec: {}
