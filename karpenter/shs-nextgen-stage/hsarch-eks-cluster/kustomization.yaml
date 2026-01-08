@@ -3,7 +3,6 @@ kind: Kustomization
 
 namespace: karpenter
 
-
 helmCharts:
   - name: karpenter
     repo: oci://public.ecr.aws/karpenter
@@ -13,6 +12,6 @@ helmCharts:
     valuesFile: override-values.yml
 
 resources:
-  - ../../../base
+  - ../../base
   - nodeclass.yaml
   - nodepool.yaml
