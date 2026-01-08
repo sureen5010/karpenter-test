@@ -1,0 +1,86 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fsx-sc
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"  
+provisioner: nfs.csi.k8s.io
+parameters:
+ server: shs-nextgen-preprod-fsx-linux.infra.nextgen.oh.shs.com
+ share: /airflow
+ directoryPerms: "700"
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions:
+ - nfsvers=3
+ - nolock
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: airflow-dags-pv
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 20Gi
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: fsx-sc
+  nfs:
+    server: shs-nextgen-preprod-fsx-linux.infra.nextgen.oh.shs.com
+    path: /airflow/dags
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: airflow-dags
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: fsx-sc
+  volumeName: airflow-dags-pv
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: airflow-logs-pv
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 20Gi
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: fsx-sc
+  nfs:
+    server: shs-nextgen-preprod-fsx-linux.infra.nextgen.oh.shs.com
+    path: /airflow/logs
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: airflow-logs
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: fsx-sc
+  volumeName: airflow-logs-pv
+
