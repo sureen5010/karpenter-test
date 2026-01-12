@@ -7,6 +7,6 @@ helmCharts:
   - name: karpenter
     repo: oci://public.ecr.aws/karpenter
     version: 1.3.2
-    releaseName: karpenter
+    releaseName: karpenter-crd
     namespace: kube-system
-    valuesFile: override-values.yml
+    includeCRDs: true
