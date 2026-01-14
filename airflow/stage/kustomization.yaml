@@ -9,7 +9,7 @@ helmCharts:
     version: 1.14.0
     releaseName: airflow
     namespace: airflow
-    valuesFile: override-values.yaml
+    valuesFile: values.yaml
 
 resources:
   - volume-setup.yaml
