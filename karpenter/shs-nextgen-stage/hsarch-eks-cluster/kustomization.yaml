@@ -10,3 +10,4 @@ helmCharts:
     releaseName: karpenter
     namespace: kube-system
     valuesFile: override-values.yml
+    includeCRDs: true
