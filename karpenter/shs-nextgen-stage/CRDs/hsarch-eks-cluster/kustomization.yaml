@@ -4,6 +4,6 @@ kind: Kustomization
 helmCharts:
   - name: karpenter-crd
     repo: oci://public.ecr.aws/karpenter
-    version: 1.7.4
+    version: 1.3.2
     releaseName: karpenter-crd
     includeCRDs: true
